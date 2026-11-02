@@ -21,7 +21,10 @@ An e-learning website built for **SDN Susukan 08 Pagi** (Susukan 08 Pagi Public 
 ## Table of Contents
 
 - [Overview](#overview)
+- [The Problem](#the-problem)
 - [User Roles](#user-roles)
+- [Product Decisions](#product-decisions)
+- [Screenshots](#screenshots)
 - [Features](#features)
 - [Gamification](#gamification)
 - [Tech Stack](#tech-stack)
@@ -39,6 +42,19 @@ SDN Susukan 08 Pagi needed a simple, child-friendly way to deliver learning mate
 - A **parent view** for following a child's progress without needing a separate account
 - An **admin panel** for managing users and approving new registrations
 
+## The Problem
+
+[ISI: how the school delivered materials and assessments before this platform, e.g. printed worksheets or WhatsApp groups, and what was not working]
+
+| User | Problem | How the platform addresses it |
+|------|---------|-------------------------------|
+| **Students** | [ISI: students' problem] | Child-friendly portal with materials per grade, timed quizzes and a daily checklist that rewards learning habits |
+| **Teachers** | [ISI: teachers' problem] | One workspace to publish materials, build quizzes and see every student's scores |
+| **Parents** | [ISI: parents' problem] | Read-only view of their child's progress and quiz results, without creating an account |
+| **School admin** | [ISI: school admin's problem] | Central management of student and teacher accounts, with an approval step for every new registration |
+
+[ISI: how these problems were gathered, e.g. interviews with teachers or the principal]
+
 ## User Roles
 
 Each role has its own login page, dashboard and permissions (enforced by role-based middleware).
@@ -49,6 +65,34 @@ Each role has its own login page, dashboard and permissions (enforced by role-ba
 | **Teacher** | Manage learning materials and quizzes, build quiz questions, set quiz duration and passing score, view student scores |
 | **Parent**  | View their child's learning progress and quiz results                                                          |
 | **Admin**   | Manage student and teacher accounts, approve or reject registrations, manage homepage images                  |
+
+## Product Decisions
+
+### Parent login with the child's NISN and date of birth
+
+Parents sign in with their child's NISN (national student ID) and date of birth instead of creating their own account. The school already has both data points for every student, so parents do not need to register or remember another password. The trade-off is weaker authentication than a personal password, which is why the parent view is read-only: it shows progress and quiz results, but cannot change anything.
+
+### Points for daily habits, badges for progress
+
+Students earn 2 points for every completed daily checklist task, and move up four badge tiers (Silver, Gold, Platinum, Diamond) as their points grow. A pop-up celebrates each new tier. Points come from consistent daily activity, not from quiz scores, so every student can progress regardless of their current grades. [ISI: why these tier ranges, and whether teachers or students gave input]
+
+### Every new account needs admin approval
+
+New student and teacher registrations stay *pending* until a school admin approves them. The platform is used by children, so only verified members of the school should be able to access it.
+
+### A learning assistant driven by teacher keywords
+
+The learning assistant suggests materials based on keywords that teachers define, instead of generating free-form answers. Teachers stay in control of what children see, and the answers are predictable.
+
+## Screenshots
+
+| Student dashboard | Quiz with timer |
+|---|---|
+| [ISI: screenshot of the student dashboard with points and badge] | [ISI: screenshot of a quiz in progress] |
+
+| Teacher workspace | Parent view |
+|---|---|
+| [ISI: screenshot of the teacher dashboard or question builder] | [ISI: screenshot of the parent progress report] |
 
 ## Features
 
@@ -168,6 +212,16 @@ Open **http://127.0.0.1:8000**.
 ## Academic Context
 
 This project was developed for the **Software Project Management (Pengelolaan Proyek Perangkat Lunak)** course. It covered the full project lifecycle — requirements gathering, planning, development and version control with Git and GitHub — for a real school use case: SDN Susukan 08 Pagi.
+
+[ISI: team size and your role in the team, if this was a group project]
+
+## Project Management Artifacts
+
+| Artifact | Description | Link |
+|----------|-------------|------|
+| Work Breakdown Structure (WBS) | Project scope broken down into deliverables and work packages | [ISI: link or image of the WBS] |
+| Gantt chart | Schedule, milestones and dependencies | [ISI: link or image of the Gantt chart] |
+| Risk register | Identified risks with likelihood, impact and mitigation | [ISI: link or image of the risk register] |
 
 ## Author
 
