@@ -24,7 +24,6 @@ An e-learning website built for **SDN Susukan 08 Pagi** (Susukan 08 Pagi Public 
 - [The Problem](#the-problem)
 - [User Roles](#user-roles)
 - [Product Decisions](#product-decisions)
-- [Screenshots](#screenshots)
 - [Features](#features)
 - [Gamification](#gamification)
 - [Tech Stack](#tech-stack)
@@ -44,16 +43,16 @@ SDN Susukan 08 Pagi needed a simple, child-friendly way to deliver learning mate
 
 ## The Problem
 
-[ISI: how the school delivered materials and assessments before this platform, e.g. printed worksheets or WhatsApp groups, and what was not working]
+The school needed to deliver learning materials and assessments online in a way young children can use on their own, while keeping teachers and parents involved in each student's progress. A single generic portal does not fit that, because the four groups of users need very different things:
 
-| User | Problem | How the platform addresses it |
-|------|---------|-------------------------------|
-| **Students** | [ISI: students' problem] | Child-friendly portal with materials per grade, timed quizzes and a daily checklist that rewards learning habits |
-| **Teachers** | [ISI: teachers' problem] | One workspace to publish materials, build quizzes and see every student's scores |
-| **Parents** | [ISI: parents' problem] | Read-only view of their child's progress and quiz results, without creating an account |
-| **School admin** | [ISI: school admin's problem] | Central management of student and teacher accounts, with an approval step for every new registration |
+| User | What they need | How the platform addresses it |
+|------|----------------|-------------------------------|
+| **Students** | Simple, age-appropriate materials and practice, and a reason to come back every day | Materials filtered by grade, timed quizzes with instant results, and a daily checklist that rewards learning habits with points and badges |
+| **Teachers** | A way to publish content and check results without extra admin work | One workspace to publish materials, build quizzes with a passing score, and see every student's scores |
+| **Parents** | Visibility into their child's progress without having to manage another account | A read-only progress view opened with the child's NISN and date of birth |
+| **School admin** | Control over who can access a platform used by children | Central management of student and teacher accounts, with an approval step for every new registration |
 
-[ISI: how these problems were gathered, e.g. interviews with teachers or the principal]
+<!-- [ISI: how the school delivered materials before this platform, and how these needs were gathered, e.g. interviews with teachers or the principal] -->
 
 ## User Roles
 
@@ -74,7 +73,7 @@ Parents sign in with their child's NISN (national student ID) and date of birth 
 
 ### Points for daily habits, badges for progress
 
-Students earn 2 points for every completed daily checklist task, and move up four badge tiers (Silver, Gold, Platinum, Diamond) as their points grow. A pop-up celebrates each new tier. Points come from consistent daily activity, not from quiz scores, so every student can progress regardless of their current grades. [ISI: why these tier ranges, and whether teachers or students gave input]
+Students earn 2 points for every completed daily checklist task, and move up four badge tiers (Silver, Gold, Platinum, Diamond) as their points grow. A pop-up celebrates each new tier. Points come from consistent daily activity, not from quiz scores, so every student can progress regardless of their current grades.
 
 ### Every new account needs admin approval
 
@@ -84,6 +83,7 @@ New student and teacher registrations stay *pending* until a school admin approv
 
 The learning assistant suggests materials based on keywords that teachers define, instead of generating free-form answers. Teachers stay in control of what children see, and the answers are predictable.
 
+<!--
 ## Screenshots
 
 | Student dashboard | Quiz with timer |
@@ -93,6 +93,9 @@ The learning assistant suggests materials based on keywords that teachers define
 | Teacher workspace | Parent view |
 |---|---|
 | [ISI: screenshot of the teacher dashboard or question builder] | [ISI: screenshot of the parent progress report] |
+
+When filled in, remove this comment wrapper and add Screenshots back to the table of contents.
+-->
 
 ## Features
 
@@ -213,8 +216,9 @@ Open **http://127.0.0.1:8000**.
 
 This project was developed for the **Software Project Management (Pengelolaan Proyek Perangkat Lunak)** course. It covered the full project lifecycle — requirements gathering, planning, development and version control with Git and GitHub — for a real school use case: SDN Susukan 08 Pagi.
 
-[ISI: team size and your role in the team, if this was a group project]
+<!-- [ISI: team size and your role in the team, if this was a group project] -->
 
+<!--
 ## Project Management Artifacts
 
 | Artifact | Description | Link |
@@ -222,6 +226,11 @@ This project was developed for the **Software Project Management (Pengelolaan Pr
 | Work Breakdown Structure (WBS) | Project scope broken down into deliverables and work packages | [ISI: link or image of the WBS] |
 | Gantt chart | Schedule, milestones and dependencies | [ISI: link or image of the Gantt chart] |
 | Risk register | Identified risks with likelihood, impact and mitigation | [ISI: link or image of the risk register] |
+
+When filled in, remove this comment wrapper.
+-->
+
+
 
 ## Author
 
