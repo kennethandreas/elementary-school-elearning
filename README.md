@@ -109,17 +109,6 @@ npm run build               # views use Vite assets
 php artisan test            # includes ParentAccessTest (access control & rate limiting)
 ```
 
-## Project Management
-
-Developed as part of the *Software Project Management* course, covering requirements gathering with the
-school, scope and schedule planning, iterative delivery of role-based modules and user acceptance testing.
-
-## Author
-
-**Kenneth Andreas** — Software Engineer
-
-GitHub: [@kennethandreas](https://github.com/kennethandreas)
-
 ## License
 
 Released under the [MIT License](LICENSE). The school name and logo belong to SDN Susukan 08 Pagi.
