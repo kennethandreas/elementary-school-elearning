@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -156,22 +157,49 @@ class AuthController extends Controller
             'tanggal_lahir' => 'required|date',
         ]);
 
+        // Limit guesses per NISN (in addition to the per-IP route throttle) so a
+        // child's date of birth cannot be brute-forced.
+        $throttleKey = 'parent-login:' . strtolower(trim($request->nisn));
+
+        if (RateLimiter::tooManyAttempts($throttleKey, 5)) {
+            $minutes = (int) ceil(RateLimiter::availableIn($throttleKey) / 60);
+
+            throw ValidationException::withMessages([
+                'nisn' => __('Terlalu banyak percobaan. Silakan coba lagi dalam :minutes menit.', ['minutes' => $minutes]),
+            ]);
+        }
+
         $student = User::where('nisn', $request->nisn)
             ->where('role', 'student')
             ->first();
 
-        if (! $student) {
-            throw ValidationException::withMessages(['nisn' => __('Data murid tidak ditemukan.')]);
+        $dateMatches = $student
+            && $student->tanggal_lahir
+            && $student->tanggal_lahir->toDateString() === now()->parse($request->tanggal_lahir)->toDateString();
+
+        if (! $dateMatches) {
+            RateLimiter::hit($throttleKey, 600);
+
+            // Same message for unknown NISN and wrong date, so NISNs cannot be enumerated.
+            throw ValidationException::withMessages(['nisn' => __('NISN atau tanggal lahir tidak sesuai.')]);
         }
 
-        // Compare date of birth (stored as date)
-        if ($student->tanggal_lahir && $student->tanggal_lahir->toDateString() === now()->parse($request->tanggal_lahir)->toDateString()) {
-            // Set session to identify parent view (no auth)
-            session(['parent_view_id' => $student->id]);
-            return redirect()->route('parent.dashboard');
-        }
+        RateLimiter::clear($throttleKey);
 
-        throw ValidationException::withMessages(['tanggal_lahir' => __('Tanggal lahir tidak cocok.')]);
+        // Parent access is session-based (no user account): store the verified student.
+        $request->session()->regenerate();
+        session(['parent_view_id' => $student->id]);
+
+        return redirect()->route('parent.dashboard');
+    }
+
+    public function parentLogout(Request $request)
+    {
+        $request->session()->forget('parent_view_id');
+        $request->session()->regenerate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('landing');
     }
 
     public function showRegister()

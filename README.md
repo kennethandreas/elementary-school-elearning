@@ -33,7 +33,10 @@ follow their child's progress without needing a separate account.
 - Student score recap per quiz and class.
 
 ### Parent
-- Access without registration using the child's NISN and date of birth.
+- Access without registration: the parent verifies the child's NISN **and** date of birth,
+  and the report is bound to that verified session (it cannot be switched to another student).
+- Brute-force protection: rate limiting per NISN and per IP, with a single generic error message
+  so NISNs cannot be enumerated.
 - Progress report: quiz history with score, correct/incorrect answers, status and time spent.
 
 ### Administrator
@@ -99,6 +102,13 @@ php artisan serve           # http://127.0.0.1:8000
 
 Change these credentials before any public deployment.
 
+### Tests
+
+```bash
+npm run build               # views use Vite assets
+php artisan test            # includes ParentAccessTest (access control & rate limiting)
+```
+
 ## Project Management
 
 Developed as part of the *Software Project Management* course, covering requirements gathering with the
@@ -109,3 +119,7 @@ school, scope and schedule planning, iterative delivery of role-based modules an
 **Kenneth Andreas** — Software Engineer
 
 GitHub: [@kennethandreas](https://github.com/kennethandreas)
+
+## License
+
+Released under the [MIT License](LICENSE). The school name and logo belong to SDN Susukan 08 Pagi.

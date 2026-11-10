@@ -55,7 +55,10 @@ Route::middleware('guest')->group(function () {
 
 
 Route::get('/login/parent', [AuthController::class, 'showParentLogin'])->name('login.parent');
-Route::post('/login/parent', [AuthController::class, 'parentLogin'])->name('login.parent.post');
+Route::post('/login/parent', [AuthController::class, 'parentLogin'])
+    ->middleware('throttle:10,1')
+    ->name('login.parent.post');
+Route::post('/logout/parent', [AuthController::class, 'parentLogout'])->name('logout.parent');
 
 
 Route::post('/logout', [AuthController::class, 'logout'])
@@ -127,9 +130,8 @@ Route::middleware(['ensure_auth', 'role:teacher'])->group(function () {
 
 Route::middleware('role:parent')->group(function () {
     Route::get('/parent/dashboard', [ParentController::class, 'dashboard'])->name('parent.dashboard');
+    Route::get('/parent/report/student', [ParentController::class, 'reportStudent'])->name('report.student');
 });
-
-Route::get('/parent/report/student', [ParentController::class, 'reportStudent'])->name('report.student');
 
 
 Route::middleware(['ensure_auth', 'role:admin'])

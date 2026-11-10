@@ -20,7 +20,8 @@ class EnsureRole
             if (session()->has('parent_view_id')) {
                 return $next($request);
             }
-            abort(403, 'Parent access denied');
+
+            return redirect()->route('login.parent');
         }
 
         $user = Auth::user();

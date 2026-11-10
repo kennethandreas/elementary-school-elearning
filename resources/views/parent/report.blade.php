@@ -32,23 +32,18 @@
         <div class="flex-1 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
             <!-- Student Selection Card -->
             <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 border-l-4 border-green-500">
-                <h2 class="text-lg font-bold text-gray-900 mb-4">Masukkan NISN Siswa</h2>
-                <form method="GET" action="{{ route('report.student') }}" class="space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div>
-                        <div class="flex gap-3">
-                            <input type="text" name="nisn" placeholder="NISN Siswa Anda" 
-                                value="{{ $student?->nisn ?? request('nisn', '') }}"
-                                class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                                required>
-                            <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg transition">
-                                Tampilkan
-                            </button>
-                        </div>
-                        @error('nisn')
-                            <p class="text-sm text-red-600 mt-2">{{ $message }}</p>
-                        @enderror
+                        <h2 class="text-lg font-bold text-gray-900">Akses Orang Tua</h2>
+                        <p class="text-sm text-gray-600">Laporan untuk NISN {{ $student->nisn }}. Akses berlaku selama sesi ini.</p>
                     </div>
-                </form>
+                    <form method="POST" action="{{ route('logout.parent') }}">
+                        @csrf
+                        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg transition">
+                            Keluar
+                        </button>
+                    </form>
+                </div>
             </div>
 
             @if($student)
